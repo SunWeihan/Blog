@@ -1,0 +1,1925 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="graph algorithm" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="EZLippi-浮生志" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="图的定义：图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。
+图的种类：地图，电路图，调度图，事物，网络，程序结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机算法--图算法介绍">
+<meta property="og:url" content="http://www.ezlippi.com/blog/2014/11/graph.html">
+<meta property="og:site_name" content="EZLippi-浮生志">
+<meta property="og:description" content="图的定义：图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。
+图的种类：地图，电路图，调度图，事物，网络，程序结构">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph1.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph2.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph3.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph4.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph5.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph6.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph7.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph8.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph9.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph10.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph11.jpg">
+<meta property="og:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph12.jpg">
+<meta property="og:updated_time" content="2016-02-29T12:37:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机算法--图算法介绍">
+<meta name="twitter:description" content="图的定义：图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。
+图的种类：地图，电路图，调度图，事物，网络，程序结构">
+<meta name="twitter:image" content="http://www.ezlippi.com/images/images/githubpages/graph/graph1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ezlippi.com/blog/2014/11/graph.html"/>
+
+
+
+
+
+  <title> 计算机算法--图算法介绍 | EZLippi-浮生志 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?340874ba9357cbe81570aa4ac1185941";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">EZLippi-浮生志</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.ezlippi.com/blog/2014/11/graph.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="EZLippi">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="EZLippi-浮生志">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="EZLippi-浮生志" src="/images/avatar.jpg">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                计算机算法--图算法介绍
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-29T00:00:00+08:00">
+                2014-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2014/11/graph.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/blog/2014/11/graph.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="图的定义："><a href="#图的定义：" class="headerlink" title="图的定义："></a>图的定义：</h2><p>图（graph）由顶点（vertex）和边（edge）的集合组成，每一条边就是一个点对（v,w)。</p>
+<p>图的种类：地图，电路图，调度图，事物，网络，程序结构<br><a id="more"></a><br>图的属性：有V个顶点的图最多有V*（V-1）/2条边<br><img src="/images/images/githubpages/graph/graph1.jpg" alt=""><br><img src="/images/images/githubpages/graph/graph2.jpg" alt=""></p>
+<h3 id="邻接矩阵："><a href="#邻接矩阵：" class="headerlink" title="邻接矩阵："></a>邻接矩阵：</h3><p>邻接矩阵是一个元素为bool值的V<em>V矩阵，若图中存在一条连接顶点V和W的边，折矩阵adj[v][w]=1,否则为0。占用的空间为V</em>V，当图是稠密时，邻接矩阵是比较合适的表达方法。<br><img src="/images/images/githubpages/graph/graph3.jpg" alt=""></p>
+<h3 id="邻接表的表示"><a href="#邻接表的表示" class="headerlink" title="邻接表的表示"></a>邻接表的表示</h3><p>对于非稠密的图，使用邻接矩阵有点浪费存储空间，可以使用邻接表，我们维护一个链表向量，给定一个顶点时，可以立即访问其链表,占用的空间为O(V+E)。<br><img src="/images/images/githubpages/graph/graph4.jpg" alt=""></p>
+<hr>
+<hr>
+<h2 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h2><h3 id="深度优先搜索介绍"><a href="#深度优先搜索介绍" class="headerlink" title="深度优先搜索介绍"></a>深度优先搜索介绍</h3><p>图的深度优先搜索(Depth First Search)，和树的先序遍历比较类似。</p>
+<p>它的思想：假设初始状态是图中所有顶点均未被访问，则从某个顶点v出发，首先访问该顶点，然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和v有路径相通的顶点都被访问到。 若此时尚有其他顶点未被访问到，则另选一个未被访问的顶点作起始点，重复上述过程，直至图中所有顶点都被访问到为止。</p>
+<p>显然，深度优先搜索是一个递归的过程。</p>
+<h3 id="深度优先搜索图解"><a href="#深度优先搜索图解" class="headerlink" title="深度优先搜索图解"></a>深度优先搜索图解</h3><h4 id="无向图的深度优先搜索"><a href="#无向图的深度优先搜索" class="headerlink" title="无向图的深度优先搜索"></a>无向图的深度优先搜索</h4><p>下面以”无向图”为例，来对深度优先搜索进行演示。<br><img src="/images/images/githubpages/graph/graph5.jpg" alt=""><br>对上面的图G1进行深度优先遍历，从顶点A开始。<br><img src="/images/images/githubpages/graph/graph6.jpg" alt=""></p>
+<ul>
+<li>第1步：访问A。</li>
+<li><p>第2步：访问(A的邻接点)C。</p>
+<p> 在第1步访问A之后，接下来应该访问的是A的邻接点，即”C,D,F”中的一个。但在本文的实现中，顶点ABCDEFG是按照顺序存储，C在”D和F”的前面，因此，先访问C。 </p>
+</li>
+<li><p>第3步：访问(C的邻接点)B。</p>
+<p> 在第2步访问C之后，接下来应该访问C的邻接点，即”B和D”中一个(A已经被访问过，就不算在内)。而由于B在D之前，先访问B。 </p>
+</li>
+<li><p>第4步：访问(C的邻接点)D。</p>
+<p> 在第3步访问了C的邻接点B之后，B没有未被访问的邻接点；因此，返回到访问C的另一个邻接点D。 </p>
+</li>
+<li><p>第5步：访问(A的邻接点)F。</p>
+<p> 前面已经访问了A，并且访问完了”A的邻接点B的所有邻接点(包括递归的邻接点在内)”；因此，此时返回到访问A的另一个邻接点F。 </p>
+</li>
+<li><p>第6步：访问(F的邻接点)G。</p>
+</li>
+<li><p>第7步：访问(G的邻接点)E。</p>
+</li>
+</ul>
+<p>因此访问顺序是：A -&gt; C -&gt; B -&gt; D -&gt; F -&gt; G -&gt; E</p>
+<h4 id="有向图的深度优先搜索"><a href="#有向图的深度优先搜索" class="headerlink" title="有向图的深度优先搜索"></a>有向图的深度优先搜索</h4><p>下面以”有向图”为例，来对深度优先搜索进行演示。<br><img src="/images/images/githubpages/graph/graph7.jpg" alt=""><br>对上面的图G2进行深度优先遍历，从顶点A开始。<br><img src="/images/images/githubpages/graph/graph8.jpg" alt=""></p>
+<ul>
+<li>第1步：访问A。</li>
+<li><p>第2步：访问B。</p>
+<p> 在访问了A之后，接下来应该访问的是A的出边的另一个顶点，即顶点B。 </p>
+</li>
+<li><p>第3步：访问C。</p>
+<p> 在访问了B之后，接下来应该访问的是B的出边的另一个顶点，即顶点C,E,F。在本文实现的图中，顶点ABCDEFG按照顺序存储，因此先访问C。 </p>
+</li>
+<li><p>第4步：访问E。</p>
+<p> 接下来访问C的出边的另一个顶点，即顶点E。 </p>
+</li>
+<li><p>第5步：访问D。</p>
+</li>
+</ul>
+<pre><code>接下来访问E的出边的另一个顶点，即顶点B,D。顶点B已经被访问过，因此访问顶点D。 
+</code></pre><ul>
+<li><p>第6步：访问F。</p>
+<p> 接下应该回溯”访问A的出边的另一个顶点F”。 </p>
+</li>
+<li><p>第7步：访问G。</p>
+</li>
+</ul>
+<p>因此访问顺序是：A -&gt; B -&gt; C -&gt; E -&gt; D -&gt; F -&gt; G</p>
+<hr>
+<hr>
+<h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><h3 id="广度优先搜索介绍"><a href="#广度优先搜索介绍" class="headerlink" title="广度优先搜索介绍"></a>广度优先搜索介绍</h3><p>广度优先搜索算法(Breadth First Search)，又称为”宽度优先搜索”或”横向优先搜索”，简称BFS。</p>
+<p>它的思想是：从图中某顶点v出发，在访问了v之后依次访问v的各个未曾访问过的邻接点，然后分别从这些邻接点出发依次访问它们的邻接点，并使得“先被访问的顶点的邻接点先于后被访问的顶点的邻接点被访问，直至图中所有已被访问的顶点的邻接点都被访问到。如果此时图中尚有顶点未被访问，则需要另选一个未曾被访问过的顶点作为新的起始点，重复上述过程，直至图中所有顶点都被访问到为止。</p>
+<p>换句话说，广度优先搜索遍历图的过程是以v为起点，由近至远，依次访问和v有路径相通且路径长度为1,2…的顶点。</p>
+<h3 id="广度优先搜索图解"><a href="#广度优先搜索图解" class="headerlink" title="广度优先搜索图解"></a>广度优先搜索图解</h3><h4 id="无向图的广度优先搜索"><a href="#无向图的广度优先搜索" class="headerlink" title="无向图的广度优先搜索"></a>无向图的广度优先搜索</h4><p>下面以”无向图”为例，来对广度优先搜索进行演示。还是以上面的图G1为例进行说明。<br><img src="/images/images/githubpages/graph/graph9.jpg" alt=""></p>
+<ul>
+<li>第1步：访问A。</li>
+<li><p>第2步：依次访问C,D,F。</p>
+<p> 在访问了A之后，接下来访问A的邻接点。前面已经说过，在本文实现中，顶点ABCDEFG按照顺序存储的，C在”D和F”的前面，因此，先访问C。再访问完C之后，再依次访问D,F。 </p>
+</li>
+<li><p>第3步：依次访问B,G。</p>
+<p> 在第2步访问完C,D,F之后，再依次访问它们的邻接点。首先访问C的邻接点B，再访问F的邻接点G。 </p>
+</li>
+<li><p>第4步：访问E。</p>
+<p> 在第3步访问完B,G之后，再依次访问它们的邻接点。只有G有邻接点E，因此访问G的邻接点E。</p>
+</li>
+</ul>
+<p>因此访问顺序是：A -&gt; C -&gt; D -&gt; F -&gt; B -&gt; G -&gt; E</p>
+<h4 id="有向图的广度优先搜索"><a href="#有向图的广度优先搜索" class="headerlink" title="有向图的广度优先搜索"></a>有向图的广度优先搜索</h4><p>下面以”有向图”为例，来对广度优先搜索进行演示。还是以上面的图G2为例进行说明。<br><img src="/images/images/githubpages/graph/graph10.jpg" alt=""></p>
+<ul>
+<li>第1步：访问A。</li>
+</ul>
+<ul>
+<li>第2步：访问B。</li>
+<li>第3步：依次访问C,E,F。</li>
+</ul>
+<pre><code>在访问了B之后，接下来访问B的出边的另一个顶点，即C,E,F。前面已经说过，在本文实现中，顶点ABCDEFG按照顺序存储的，因此会先访问C，再依次访问E,F。 
+</code></pre><ul>
+<li><p>第4步：依次访问D,G。</p>
+<p> 在访问完C,E,F之后，再依次访问它们的出边的另一个顶点。还是按照C,E,F的顺序访问，C的已经全部访问过了，那么就只剩下E,F；先访问E的邻接点D，再访问F的邻接点G。</p>
+</li>
+</ul>
+<p>因此访问顺序是：A -&gt; B -&gt; C -&gt; E -&gt; F -&gt; D -&gt; G</p>
+<h2 id="搜索算法的源码"><a href="#搜索算法的源码" class="headerlink" title="搜索算法的源码"></a>搜索算法的源码</h2><p>1.邻接矩阵表示的”无向图</p>
+<pre><code>    /**
+    * C++: 邻接矩阵表示的&quot;无向图(Matrix Undirected Graph)&quot;
+    *
+    * @author LippiOuYang
+    * @date 2013/04/19
+    */
+
+        #include &lt;iomanip&gt;
+        #include &lt;iostream&gt;
+        #include &lt;vector&gt;
+        using namespace std;
+
+    #define MAX 100
+    class MatrixUDG {
+    private:
+        char mVexs[MAX];    // 顶点集合
+        int mVexNum;             // 顶点数
+        int mEdgNum;             // 边数
+        int mMatrix[MAX][MAX];   // 邻接矩阵
+
+    public:
+        // 创建图(自己输入数据)
+        MatrixUDG();
+        // 创建图(用已提供的矩阵)
+        MatrixUDG(char vexs[], int vlen, char edges[][2], int elen);
+        ~MatrixUDG();
+
+        // 深度优先搜索遍历图
+        void DFS();
+        // 广度优先搜索（类似于树的层次遍历）
+        void BFS();
+        // 打印矩阵队列图
+        void print();
+
+    private:
+        // 读取一个输入字符
+        char readChar();
+        // 返回ch在mMatrix矩阵中的位置
+        int getPosition(char ch);
+        // 返回顶点v的第一个邻接顶点的索引，失败则返回-1
+        int firstVertex(int v);
+        // 返回顶点v相对于w的下一个邻接顶点的索引，失败则返回-1
+        int nextVertex(int v, int w);
+        // 深度优先搜索遍历图的递归实现
+        void DFS(int i, int *visited);
+
+};
+
+/* 
+ * 创建图(自己输入数据)
+ */
+MatrixUDG::MatrixUDG()
+{
+    char c1, c2;
+    int i, p1, p2;
+
+    // 输入&quot;顶点数&quot;和&quot;边数&quot;
+    cout &lt;&lt; &quot;input vertex number: &quot;;
+    cin &gt;&gt; mVexNum;
+    cout &lt;&lt; &quot;input edge number: &quot;;
+    cin &gt;&gt; mEdgNum;
+    if ( mVexNum &lt; 1 || mEdgNum &lt; 1 || (mEdgNum &gt; (mVexNum * (mVexNum-1))))
+    {
+        cout &lt;&lt; &quot;input error: invalid parameters!&quot; &lt;&lt; endl;
+        return ;
+    }
+
+    // 初始化&quot;顶点&quot;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        cout &lt;&lt; &quot;vertex(&quot; &lt;&lt; i &lt;&lt; &quot;): &quot;;
+        mVexs[i] = readChar();
+    }
+
+    // 初始化&quot;边&quot;
+    for (i = 0; i &lt; mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        cout &lt;&lt; &quot;edge(&quot; &lt;&lt; i &lt;&lt; &quot;): &quot;;
+        c1 = readChar();
+        c2 = readChar();
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        if (p1==-1 || p2==-1)
+        {
+            cout &lt;&lt; &quot;input error: invalid edge!&quot; &lt;&lt; endl;
+            return ;
+        }
+
+        mMatrix[p1][p2] = 1;
+        mMatrix[p2][p1] = 1;
+    }
+}
+
+/*
+ * 创建图(用已提供的矩阵)
+ *
+ * 参数说明：
+ *     vexs  -- 顶点数组
+ *     vlen  -- 顶点数组的长度
+ *     edges -- 边数组
+ *     elen  -- 边数组的长度
+ */
+MatrixUDG::MatrixUDG(char vexs[], int vlen, char edges[][2], int elen)
+{
+    int i, p1, p2;
+
+    // 初始化&quot;顶点数&quot;和&quot;边数&quot;
+    mVexNum = vlen;
+    mEdgNum = elen;
+    // 初始化&quot;顶点&quot;
+    for (i = 0; i &lt; mVexNum; i++)
+        mVexs[i] = vexs[i];
+
+    // 初始化&quot;边&quot;
+    for (i = 0; i &lt; mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        p1 = getPosition(edges[i][0]);
+        p2 = getPosition(edges[i][1]);
+
+        mMatrix[p1][p2] = 1;
+        mMatrix[p2][p1] = 1;
+    }
+}
+
+/* 
+ * 析构函数
+ */
+MatrixUDG::~MatrixUDG() 
+{
+}
+
+/*
+ * 返回ch在mMatrix矩阵中的位置
+ */
+int MatrixUDG::getPosition(char ch)
+{
+    int i;
+    for(i=0; i&lt;mVexNum; i++)
+        if(mVexs[i]==ch)
+            return i;
+    return -1;
+}
+
+/*
+ * 读取一个输入字符
+ */
+char MatrixUDG::readChar()
+{
+    char ch;
+
+    do {
+        cin &gt;&gt; ch;
+    } while(!((ch&gt;=&apos;a&apos;&amp;&amp;ch&lt;=&apos;z&apos;) || (ch&gt;=&apos;A&apos;&amp;&amp;ch&lt;=&apos;Z&apos;)));
+
+    return ch;
+}
+
+
+/*
+ * 返回顶点v的第一个邻接顶点的索引，失败则返回-1
+ */
+int MatrixUDG::firstVertex(int v)
+{
+    int i;
+
+    if (v&lt;0 || v&gt;(mVexNum-1))
+        return -1;
+
+    for (i = 0; i &lt; mVexNum; i++)
+        if (mMatrix[v][i] == 1)
+            return i;
+
+    return -1;
+}
+
+/*
+ * 返回顶点v相对于w的下一个邻接顶点的索引，失败则返回-1
+ */
+int MatrixUDG::nextVertex(int v, int w)
+{
+    int i;
+
+    if (v&lt;0 || v&gt;(mVexNum-1) || w&lt;0 || w&gt;(mVexNum-1))
+        return -1;
+
+    for (i = w + 1; i &lt; mVexNum; i++)
+        if (mMatrix[v][i] == 1)
+            return i;
+
+    return -1;
+}
+
+/*
+ * 深度优先搜索遍历图的递归实现
+ */
+void MatrixUDG::DFS(int i, int *visited)
+{
+    int w;
+
+    visited[i] = 1;
+    cout &lt;&lt; mVexs[i] &lt;&lt; &quot; &quot;;
+    // 遍历该顶点的所有邻接顶点。若是没有访问过，那么继续往下走
+    for (w = firstVertex(i); w &gt;= 0; w = nextVertex(i, w))
+    {
+        if (!visited[w])
+            DFS(w, visited);
+    }
+
+}
+
+/*
+ * 深度优先搜索遍历图
+ */
+void MatrixUDG::DFS()
+{
+    int i;
+    int visited[MAX];       // 顶点访问标记
+
+    // 初始化所有顶点都没有被访问
+    for (i = 0; i &lt; mVexNum; i++)
+        visited[i] = 0;
+
+    cout &lt;&lt; &quot;DFS: &quot;;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        //printf(&quot;\n== LOOP(%d)\n&quot;, i);
+        if (!visited[i])
+            DFS(i, visited);
+    }
+    cout &lt;&lt; endl;
+}
+
+/*
+ * 广度优先搜索（类似于树的层次遍历）
+ */
+void MatrixUDG::BFS()
+{
+    int head = 0;
+    int rear = 0;
+    int queue[MAX];     // 辅组队列
+    int visited[MAX];   // 顶点访问标记
+    int i, j, k;
+
+    for (i = 0; i &lt; mVexNum; i++)
+        visited[i] = 0;
+
+    cout &lt;&lt; &quot;BFS: &quot;;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        if (!visited[i])
+        {
+            visited[i] = 1;
+            cout &lt;&lt; mVexs[i] &lt;&lt; &quot; &quot;;
+            queue[rear++] = i;  // 入队列
+        }
+        while (head != rear) 
+        {
+            j = queue[head++];  // 出队列
+            for (k = firstVertex(j); k &gt;= 0; k = nextVertex(j, k)) //k是为访问的邻接顶点
+            {
+                if (!visited[k])
+                {
+                    visited[k] = 1;
+                    cout &lt;&lt; mVexs[k] &lt;&lt; &quot; &quot;;
+                    queue[rear++] = k;
+                }
+            }
+        }
+    }
+    cout &lt;&lt; endl;
+}
+
+/*
+ * 打印矩阵队列图
+ */
+void MatrixUDG::print()
+{
+    int i,j;
+
+    cout &lt;&lt; &quot;Martix Graph:&quot; &lt;&lt; endl;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        for (j = 0; j &lt; mVexNum; j++)
+            cout &lt;&lt; mMatrix[i][j] &lt;&lt; &quot; &quot;;
+        cout &lt;&lt; endl;
+    }
+}
+
+
+int main()
+{
+    char vexs[] = {&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;};
+    char edges[][2] = {
+        {&apos;A&apos;, &apos;C&apos;}, 
+        {&apos;A&apos;, &apos;D&apos;}, 
+        {&apos;A&apos;, &apos;F&apos;}, 
+        {&apos;B&apos;, &apos;C&apos;}, 
+        {&apos;C&apos;, &apos;D&apos;}, 
+        {&apos;E&apos;, &apos;G&apos;}, 
+        {&apos;F&apos;, &apos;G&apos;}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    MatrixUDG* pG;
+
+    // 自定义&quot;图&quot;(输入矩阵队列)
+    //pG = new MatrixUDG();
+    // 采用已有的&quot;图&quot;
+    pG = new MatrixUDG(vexs, vlen, edges, elen);
+
+    pG-&gt;print();   // 打印图
+    pG-&gt;DFS();     // 深度优先遍历
+    pG-&gt;BFS();     // 广度优先遍历
+
+    return 0;
+}
+</code></pre><p>2.邻接表表示的”无向图</p>
+<pre><code>/**
+ * C++: 邻接表表示的&quot;无向图(List Undirected Graph)&quot;
+ *
+ * @author LippiOuYang
+ * @date 2013/04/19
+ */
+
+    #include &lt;iomanip&gt;
+    #include &lt;iostream&gt;
+    #include &lt;vector&gt;
+    using namespace std;
+
+#define MAX 100
+// 邻接表
+class ListUDG
+{
+    private: // 内部类
+        // 邻接表中表对应的链表的顶点
+        class ENode
+        {
+            public:
+                int ivex;           // 该边所指向的顶点的位置
+                ENode *nextEdge;    // 指向下一条弧的指针
+        };
+
+        // 邻接表中表的顶点
+        class VNode
+        {
+            public:
+                char data;          // 顶点信息
+                ENode *firstEdge;   // 指向第一条依附该顶点的弧
+        };
+
+    private: // 私有成员
+        int mVexNum;             // 图的顶点的数目
+        int mEdgNum;             // 图的边的数目
+        VNode mVexs[MAX];
+
+    public:
+        // 创建邻接表对应的图(自己输入)
+        ListUDG();
+        // 创建邻接表对应的图(用已提供的数据)
+        ListUDG(char vexs[], int vlen, char edges[][2], int elen);
+        ~ListUDG();
+
+        // 深度优先搜索遍历图
+        void DFS();
+        // 广度优先搜索（类似于树的层次遍历）
+        void BFS();
+        // 打印邻接表图
+        void print();
+
+    private:
+        // 读取一个输入字符
+        char readChar();
+        // 返回ch的位置
+        int getPosition(char ch);
+        // 深度优先搜索遍历图的递归实现
+        void DFS(int i, int *visited);
+        // 将node节点链接到list的最后
+        void linkLast(ENode *list, ENode *node);
+};
+
+/*
+ * 创建邻接表对应的图(自己输入)
+ */
+ListUDG::ListUDG()
+{
+    char c1, c2;
+    int v, e;
+    int i, p1, p2;
+    ENode *node1, *node2;
+
+    // 输入&quot;顶点数&quot;和&quot;边数&quot;
+    cout &lt;&lt; &quot;input vertex number: &quot;;
+    cin &gt;&gt; mVexNum;
+    cout &lt;&lt; &quot;input edge number: &quot;;
+    cin &gt;&gt; mEdgNum;
+    if ( mVexNum &lt; 1 || mEdgNum &lt; 1 || (mEdgNum &gt; (mVexNum * (mVexNum-1))))
+    {
+        cout &lt;&lt; &quot;input error: invalid parameters!&quot; &lt;&lt; endl;
+        return ;
+    }
+
+    // 初始化&quot;邻接表&quot;的顶点
+    for(i=0; i&lt;mVexNum; i++)
+    {
+        cout &lt;&lt; &quot;vertex(&quot; &lt;&lt; i &lt;&lt; &quot;): &quot;;
+        mVexs[i].data = readChar();
+        mVexs[i].firstEdge = NULL;
+    }
+
+    // 初始化&quot;邻接表&quot;的边
+    for(i=0; i&lt;mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        cout &lt;&lt; &quot;edge(&quot; &lt;&lt; i &lt;&lt; &quot;): &quot;;
+        c1 = readChar();
+        c2 = readChar();
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        // 初始化node1
+        node1 = new ENode();
+        node1-&gt;ivex = p2;
+        // 将node1链接到&quot;p1所在链表的末尾&quot;
+        if(mVexs[p1].firstEdge == NULL)
+          mVexs[p1].firstEdge = node1;
+        else
+            linkLast(mVexs[p1].firstEdge, node1);
+        // 初始化node2
+        node2 = new ENode();
+        node2-&gt;ivex = p1;
+        // 将node2链接到&quot;p2所在链表的末尾&quot;
+        if(mVexs[p2].firstEdge == NULL)
+          mVexs[p2].firstEdge = node2;
+        else
+            linkLast(mVexs[p2].firstEdge, node2);
+    }
+}
+
+/*
+ * 创建邻接表对应的图(用已提供的数据)
+ */
+ListUDG::ListUDG(char vexs[], int vlen, char edges[][2], int elen)
+{
+    char c1, c2;
+    int i, p1, p2;
+    ENode *node1, *node2;
+
+    // 初始化&quot;顶点数&quot;和&quot;边数&quot;
+    mVexNum = vlen;
+    mEdgNum = elen;
+    // 初始化&quot;邻接表&quot;的顶点
+    for(i=0; i&lt;mVexNum; i++)
+    {
+        mVexs[i].data = vexs[i];
+        mVexs[i].firstEdge = NULL;
+    }
+
+    // 初始化&quot;邻接表&quot;的边
+    for(i=0; i&lt;mEdgNum; i++)
+    {
+        // 读取边的起始顶点和结束顶点
+        c1 = edges[i][0];
+        c2 = edges[i][1];
+
+        p1 = getPosition(c1);
+        p2 = getPosition(c2);
+        // 初始化node1
+        node1 = new ENode();
+        node1-&gt;ivex = p2;
+        // 将node1链接到&quot;p1所在链表的末尾&quot;
+        if(mVexs[p1].firstEdge == NULL)
+          mVexs[p1].firstEdge = node1;
+        else
+            linkLast(mVexs[p1].firstEdge, node1);
+        // 初始化node2
+        node2 = new ENode();
+        node2-&gt;ivex = p1;
+        // 将node2链接到&quot;p2所在链表的末尾&quot;
+        if(mVexs[p2].firstEdge == NULL)
+          mVexs[p2].firstEdge = node2;
+        else
+            linkLast(mVexs[p2].firstEdge, node2);
+    }
+}
+
+/* 
+ * 析构函数
+ */
+ListUDG::~ListUDG() 
+{
+}
+
+/*
+ * 将node节点链接到list的最后
+ */
+void ListUDG::linkLast(ENode *list, ENode *node)
+{
+    ENode *p = list;
+
+    while(p-&gt;nextEdge)
+        p = p-&gt;nextEdge;
+    p-&gt;nextEdge = node;
+}
+
+/*
+ * 返回ch的位置
+ */
+int ListUDG::getPosition(char ch)
+{
+    int i;
+    for(i=0; i&lt;mVexNum; i++)
+        if(mVexs[i].data==ch)
+            return i;
+    return -1;
+}
+
+/*
+ * 读取一个输入字符
+ */
+char ListUDG::readChar()
+{
+    char ch;
+
+    do {
+        cin &gt;&gt; ch;
+    } while(!((ch&gt;=&apos;a&apos;&amp;&amp;ch&lt;=&apos;z&apos;) || (ch&gt;=&apos;A&apos;&amp;&amp;ch&lt;=&apos;Z&apos;)));
+
+    return ch;
+}
+
+
+/*
+ * 深度优先搜索遍历图的递归实现
+ */
+void ListUDG::DFS(int i, int *visited)
+{
+    ENode *node;
+
+    visited[i] = 1;
+    cout &lt;&lt; mVexs[i].data &lt;&lt; &quot; &quot;;
+    node = mVexs[i].firstEdge;
+    while (node != NULL)
+    {
+        if (!visited[node-&gt;ivex])
+            DFS(node-&gt;ivex, visited);
+        node = node-&gt;nextEdge;
+    }
+}
+
+/*
+ * 深度优先搜索遍历图
+ */
+void ListUDG::DFS()
+{
+    int i;
+    int visited[MAX];       // 顶点访问标记
+
+    // 初始化所有顶点都没有被访问
+    for (i = 0; i &lt; mVexNum; i++)
+        visited[i] = 0;
+
+    cout &lt;&lt; &quot;DFS: &quot;;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        if (!visited[i])
+            DFS(i, visited);
+    }
+    cout &lt;&lt; endl;
+}
+
+/*
+ * 广度优先搜索（类似于树的层次遍历）
+ */
+void ListUDG::BFS()
+{
+    int head = 0;
+    int rear = 0;
+    int queue[MAX];     // 辅组队列
+    int visited[MAX];   // 顶点访问标记
+    int i, j, k;
+    ENode *node;
+
+    for (i = 0; i &lt; mVexNum; i++)
+        visited[i] = 0;
+
+    cout &lt;&lt; &quot;BFS: &quot;;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        if (!visited[i])
+        {
+            visited[i] = 1;
+            cout &lt;&lt; mVexs[i].data &lt;&lt; &quot; &quot;;
+            queue[rear++] = i;  // 入队列
+        }
+        while (head != rear) 
+        {
+            j = queue[head++];  // 出队列
+            node = mVexs[j].firstEdge;
+            while (node != NULL)
+            {
+                k = node-&gt;ivex;
+                if (!visited[k])
+                {
+                    visited[k] = 1;
+                    cout &lt;&lt; mVexs[k].data &lt;&lt; &quot; &quot;;
+                    queue[rear++] = k;
+                }
+                node = node-&gt;nextEdge;
+            }
+        }
+    }
+    cout &lt;&lt; endl;
+}
+
+/*
+ * 打印邻接表图
+ */
+void ListUDG::print()
+{
+    int i,j;
+    ENode *node;
+
+    cout &lt;&lt; &quot;List Graph:&quot; &lt;&lt; endl;
+    for (i = 0; i &lt; mVexNum; i++)
+    {
+        cout &lt;&lt; i &lt;&lt; &quot;(&quot; &lt;&lt; mVexs[i].data &lt;&lt; &quot;): &quot;;
+        node = mVexs[i].firstEdge;
+        while (node != NULL)
+        {
+            cout &lt;&lt; node-&gt;ivex &lt;&lt; &quot;(&quot; &lt;&lt; mVexs[node-&gt;ivex].data &lt;&lt; &quot;) &quot;;
+            node = node-&gt;nextEdge;
+        }
+        cout &lt;&lt; endl;
+    }
+}
+
+int main()
+{
+    char vexs[] = {&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;D&apos;, &apos;E&apos;, &apos;F&apos;, &apos;G&apos;};
+    char edges[][2] = {
+        {&apos;A&apos;, &apos;C&apos;}, 
+        {&apos;A&apos;, &apos;D&apos;}, 
+        {&apos;A&apos;, &apos;F&apos;}, 
+        {&apos;B&apos;, &apos;C&apos;}, 
+        {&apos;C&apos;, &apos;D&apos;}, 
+        {&apos;E&apos;, &apos;G&apos;}, 
+        {&apos;F&apos;, &apos;G&apos;}};
+    int vlen = sizeof(vexs)/sizeof(vexs[0]);
+    int elen = sizeof(edges)/sizeof(edges[0]);
+    ListUDG* pG;
+
+    // 自定义&quot;图&quot;(输入矩阵队列)
+    //pG = new ListUDG();
+    // 采用已有的&quot;图&quot;
+    pG = new ListUDG(vexs, vlen, edges, elen);
+
+    pG-&gt;print();   // 打印图
+    pG-&gt;DFS();     // 深度优先遍历
+    pG-&gt;BFS();     // 广度优先遍历
+
+    return 0;
+}
+</code></pre><hr>
+<p>##迪杰斯特拉算法</p>
+<p>迪杰斯特拉(Dijkstra)算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。<br>它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想)，直到扩展到终点为止。</p>
+<h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p> 通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。</p>
+<p> 此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。</p>
+<p>初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ul>
+<li>(1)<br>初始时，S只包含起点s；U包含除s外的其他顶点，且U中顶点的距离为”起点s到该顶点的距离”[例如，U中顶点v的距离为(s,v)的长度，然后s和v不相邻，则v的距离为∞]。</li>
+<li>(2) 从U中选出”距离最短的顶点k”，并将顶点k加入到S中；同时，从U中移除顶点k。</li>
+<li>(3)<br>更新U中各个顶点到起点s的距离。之所以更新U中顶点的距离，是由于上一步中确定了k是求出最短路径的顶点，从而可以利用k来更新其它顶点的距离；例如，(s,v)的距离可能大于(s,k)+(k,v)的距离。</li>
+<li>(4) 重复步骤(2)和(3)，直到遍历完所有顶点。</li>
+</ul>
+<p>单纯的看上面的理论可能比较难以理解，下面通过实例来对该算法进行说明。</p>
+<p>5.3迪杰斯特拉算法图解<br><img src="/images/images/githubpages/graph/graph11.jpg" alt=""><br>以上图G4为例，来对迪杰斯特拉进行算法演示(以第4个顶点D为起点)。<br><img src="/images/images/githubpages/graph/graph12.jpg" alt=""></p>
+<ul>
+<li>初始状态：S是已计算出最短路径的顶点集合，U是未计算除最短路径的顶点的集合！</li>
+</ul>
+<ul>
+<li><p>第1步：将顶点D加入到S中。</p>
+<p> 此时，S={D(0)}, U={A(∞),B(∞),C(3),E(4),F(∞),G(∞)}。     注:C(3)表示C到起点D的距离是3。</p>
+</li>
+<li><p>第2步：将顶点C加入到S中。</p>
+<p> 上一步操作之后，U中顶点C到起点D的距离最短；因此，将C加入到S中，同时更新U中顶点的距离。以顶点F为例，之前F到D的距离为∞；但是将C加入到S之后，F到D的距离为9=(F,C)+(C,D)。<br> 此时，S={D(0),C(3)}, U={A(∞),B(23),E(4),F(9),G(∞)}。</p>
+</li>
+<li><p>第3步：将顶点E加入到S中。</p>
+<p> 上一步操作之后，U中顶点E到起点D的距离最短；因此，将E加入到S中，同时更新U中顶点的距离。还是以顶点F为例，之前F到D的距离为9；但是将E加入到S之后，F到D的距离为6=(F,E)+(E,D)。<br> 此时，S={D(0),C(3),E(4)}, U={A(∞),B(23),F(6),G(12)}。</p>
+</li>
+<li><p>第4步：将顶点F加入到S中。</p>
+</li>
+</ul>
+<pre><code>此时，S={D(0),C(3),E(4),F(6)}, U={A(22),B(13),G(12)}。
+</code></pre><ul>
+<li><p>第5步：将顶点G加入到S中。</p>
+<p> 此时，S={D(0),C(3),E(4),F(6),G(12)}, U={A(22),B(13)}。</p>
+</li>
+<li><p>第6步：将顶点B加入到S中。</p>
+<p> 此时，S={D(0),C(3),E(4),F(6),G(12),B(13)}, U={A(22)}。</p>
+</li>
+<li><p>第7步：将顶点A加入到S中。</p>
+<p> 此时，S={D(0),C(3),E(4),F(6),G(12),B(13),A(22)}。</p>
+</li>
+</ul>
+<p>此时，起点D到各个顶点的最短距离就计算出来了：A(22) B(13) C(3) D(0) E(4) F(6) G(12)。</p>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><hr>
+<p>本文以”邻接矩阵”为例对迪杰斯特拉算法进行说明，</p>
+<h4 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h4><pre><code>// 邻接矩阵
+typedef struct _graph
+{
+    char vexs[MAX];       // 顶点集合
+    int vexnum;           // 顶点数
+    int edgnum;           // 边数
+    int matrix[MAX][MAX]; // 邻接矩阵
+}Graph, *PGraph;
+
+// 边的结构体
+typedef struct _EdgeData
+{
+    char start; // 边的起点
+    char end;   // 边的终点
+    int weight; // 边的权重
+}EData;
+</code></pre><p>Graph是邻接矩阵对应的结构体。<br>vexs用于保存顶点，vexnum是顶点数，edgnum是边数；matrix则是用于保存矩阵信息的二维数组。例如，matrix[i][j]=1，则表示”顶点i(即vexs[i])”和”顶点j(即vexs[j])”是邻接点；matrix[i][j]=0，则表示它们不是邻接点。<br>EData是邻接矩阵边对应的结构体。</p>
+<p>####迪杰斯特拉算法</p>
+<pre><code>/*
+ * Dijkstra最短路径。
+ * 即，统计图(G)中&quot;顶点vs&quot;到其它各个顶点的最短路径。
+ *
+ * 参数说明：
+ *        G -- 图
+ *       vs -- 起始顶点(start vertex)。即计算&quot;顶点vs&quot;到其它顶点的最短路径。
+ *     prev -- 前驱顶点数组。即，prev[i]的值是&quot;顶点vs&quot;到&quot;顶点i&quot;的最短路径所经历的全部顶点中，位于&quot;顶点i&quot;之前的那个顶点。
+ *     dist -- 长度数组。即，dist[i]是&quot;顶点vs&quot;到&quot;顶点i&quot;的最短路径的长度。
+ */
+
+    void dijkstra(Graph G, int vs, int prev[], int dist[])
+    {
+        int i,j,k;
+        int min;
+        int tmp;
+    int flag[MAX];      // flag[i]=1表示&quot;顶点vs&quot;到&quot;顶点i&quot;的最短路径已成功获取。
+
+    // 初始化
+    for (i = 0; i &lt; G.vexnum; i++)
+    {
+        flag[i] = 0;              // 顶点i的最短路径还没获取到。
+
+
+           prev[i] = 0;              // 顶点i的前驱顶点为0。
+            dist[i] = G.matrix[vs][i];// 顶点i的最短路径为&quot;顶点vs&quot;到&quot;顶点i&quot;的权。
+        }
+
+        // 对&quot;顶点vs&quot;自身进行
+
+    初始化
+    flag[vs] = 1;
+    dist[vs] = 0;
+
+    // 遍历G.vexnum-1次；每次找出一个顶点的最短路径。
+    for (i = 1; i &lt; G.vexnum; i++)
+    {
+    // 寻找当前最小的路径；
+    // 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。
+    min = INF;
+    for (j = 0; j &lt; G.vexnum; j++)
+    {
+        if (flag[j]==0 &amp;&amp; dist[j]&lt;min)
+        {
+            min = dist[j];
+            k = j;
+        }
+    }
+    // 标记&quot;顶点k&quot;为已经获取到最短路径
+    flag[k] = 1;
+
+    // 修正当前最短路径和前驱顶点
+    // 即，当已经&quot;顶点k的最短路径&quot;之后，更新&quot;未获取最短路径的顶点的最短路径和前驱顶点&quot;。
+    for (j = 0; j &lt; G.vexnum; j++)
+    {
+        tmp = (G.matrix[k][j]==INF ? INF : (min + G.matrix[k][j])); // 防止溢出
+        if (flag[j] == 0 &amp;&amp; (tmp  &lt; dist[j]) )
+        {
+            dist[j] = tmp;
+            prev[j] = k;
+        }
+    }
+}
+
+    // 打印dijkstra最短路径的结果
+    printf(&quot;dijkstra(%c): \n&quot;, G.vexs[vs]);
+    for (i = 0; i &lt; G.vexnum; i++)
+        printf(&quot;  shortest(%c, %c)=%d\n&quot;, G.vexs[vs], G.vexs[i], dist[i]);
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>🐶 您的支持将鼓励我继续创作 🐶</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-img.jpg" alt="EZLippi WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-img.jpg" alt="EZLippi Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2014/11/web-server.html" rel="next" title="也谈如何构建高性能服务端程序">
+                <i class="fa fa-chevron-left"></i> 也谈如何构建高性能服务端程序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2014/12/improve-webServer-performance.html" rel="prev" title="谈谈如何提高web服务器并发性能">
+                谈谈如何提高web服务器并发性能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="EZLippi" />
+          <p class="site-author-name" itemprop="name">EZLippi</p>
+          <p class="site-description motion-element" itemprop="description">Easy Lippi</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/EZLippi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/ouyanglip" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/lippi-ouyang" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-battery-3"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.woaitqs.cc/" title="Qisen Tang" target="_blank">Qisen Tang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://szhshp.org" title="szhshp的博客" target="_blank">szhshp的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://python.zhangwei.website" title="JuniorCoder" target="_blank">JuniorCoder</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hippo-jessy.com" title="Hippo" target="_blank">Hippo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.zhihu.com/people/lippi-ouyang" title="友链出租" target="_blank">友链出租</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#图的定义："><span class="nav-number">1.</span> <span class="nav-text">图的定义：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接矩阵："><span class="nav-number">1.1.</span> <span class="nav-text">邻接矩阵：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接表的表示"><span class="nav-number">1.2.</span> <span class="nav-text">邻接表的表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">2.</span> <span class="nav-text">深度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先搜索介绍"><span class="nav-number">2.1.</span> <span class="nav-text">深度优先搜索介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先搜索图解"><span class="nav-number">2.2.</span> <span class="nav-text">深度优先搜索图解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无向图的深度优先搜索"><span class="nav-number">2.2.1.</span> <span class="nav-text">无向图的深度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有向图的深度优先搜索"><span class="nav-number">2.2.2.</span> <span class="nav-text">有向图的深度优先搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">3.</span> <span class="nav-text">广度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#广度优先搜索介绍"><span class="nav-number">3.1.</span> <span class="nav-text">广度优先搜索介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广度优先搜索图解"><span class="nav-number">3.2.</span> <span class="nav-text">广度优先搜索图解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无向图的广度优先搜索"><span class="nav-number">3.2.1.</span> <span class="nav-text">无向图的广度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有向图的广度优先搜索"><span class="nav-number">3.2.2.</span> <span class="nav-text">有向图的广度优先搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索算法的源码"><span class="nav-number">4.</span> <span class="nav-text">搜索算法的源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思想"><span class="nav-number">4.1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作步骤"><span class="nav-number">4.2.</span> <span class="nav-text">操作步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本定义"><span class="nav-number">4.3.1.</span> <span class="nav-text">基本定义</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">EZLippi</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>| Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+</div>
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'lippi';
+      var disqus_identifier = '/blog/2014/11/graph.html';
+
+      var disqus_title = "计算机算法--图算法介绍";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
